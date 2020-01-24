@@ -218,15 +218,16 @@
   <% } %>
 </head>
 <body>
-<noscript>You need to enable JavaScript to run this app.</noscript>
-<div id="root">
-  <div class="shell-loader">
-    <img class="shell-loader__i-logo" src="assets/svg/logo.svg">
-    <div class="shell-loader__spinner-container">
-      <div class="shell-loader__spinner"><span></span></div>
-    </div>
-  </div>
+
+<button id="decrement" class="counter_button">-</button>
+<div id="counter-value" class="counter_value">
+  0
 </div>
+<button id="increment" class="counter_button">+</button>
+
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js"></script>
+
 <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
 <script async="true" src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
 <% } %>

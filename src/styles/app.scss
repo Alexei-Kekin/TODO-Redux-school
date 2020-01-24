@@ -1,3 +1,30 @@
 @import './variables';
 @import 'reset';
 @import './mixins';
+
+body {
+  padding: 50px;
+}
+
+.counter_value{
+  display: inline-block;
+  padding: 10px 20px;
+  width: 50px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.counter_button{
+  width: 40px;
+  border: 0.5px solid black;
+  border-radius: 4px;
+  outline: none;
+  &:hover{
+    background-color: black;
+    color: white;
+    border: 0.5px solid grey;
+    &:active{
+      transform: scale(0.9);
+    }
+  }
+}
