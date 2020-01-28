@@ -1,4 +1,4 @@
-import { DECREMENT, INCREMENT } from "./constans";
+import { DECREMENT, INCREMENT } from './constans';
 
 export function counterReducer(state = 0, action) {
   switch (action.type) {
