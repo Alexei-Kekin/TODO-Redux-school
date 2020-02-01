@@ -1,5 +1,5 @@
-import  { store } from "../../store";
-import {addTodo} from "./actions";
+import { store } from '../../store';
+import { addTodo, removeTodo } from './actions';
 
 const todoRootNode = document.getElementById('todo-list-root');
 const todoInputNode = document.getElementById('todo-input');
@@ -18,13 +18,23 @@ function renderTodoList() {
   const { items } = todoReducer;
   const listNode = document.createElement('ul');
 
-  console.log(items);
+  todoRootNode.innerHTML = '';
 
   items.forEach(item => {
     const itemNode = document.createElement('li');
+    const itemButtonNode = document.createElement('button');
 
-    itemNode.innerText = item;
+    itemButtonNode.innerText = 'X';
+    itemNode.className = 'todo__list-item';
+    itemButtonNode.className = 'todo__list-item-btn';
+
+    itemNode.innerText = item.title;
+    itemNode.appendChild(itemButtonNode);
     listNode.appendChild(itemNode);
+
+    itemButtonNode.addEventListener('click', () => {
+      store.dispatch(removeTodo(item.id));
+    });
   });
 
   todoRootNode.append(listNode);

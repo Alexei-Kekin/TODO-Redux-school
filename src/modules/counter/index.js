@@ -1,5 +1,5 @@
 import { store } from '../../store';
-import { createCounterIncrementAction, createCounterDecrementAction } from "./actions";
+import { createCounterIncrementAction, createCounterDecrementAction } from './actions';
 
 const counterValueNode = document.getElementById('counter-value');
 const counterDecrement = document.getElementById('decrement');
