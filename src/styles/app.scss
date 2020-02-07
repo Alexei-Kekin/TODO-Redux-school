@@ -2,6 +2,20 @@
 @import 'reset';
 @import './mixins';
 
+@keyframes item-fade-in-from-right {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(30%, 0);
+  }
+
+  100% {
+    opacity: 0.5;
+    visibility: visible;
+    transform: translate(0, 0);
+  }
+}
+
 body {
   padding: 50px;
   background-color: aquamarine;
@@ -17,6 +31,7 @@ body {
 
 .counter_button{
   width: 40px;
+  margin: 0 3px;
   border: 0.5px solid black;
   border-radius: 4px;
   outline: none;
@@ -31,8 +46,14 @@ body {
 }
 
 .todo {
+  width: 400px;
   padding: 30px;
   border: 1px solid black;
+  background: transparent;
+}
+
+.todo--input-empty {
+  background: #ff8c80;
 }
 
 .todo-controls {
@@ -49,6 +70,11 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
+}
+
+.todo__item-preview {
+  opacity: 0.5;
+  animation: item-fade-in-from-right 500ms;
 }
 
 .todo__list-item-btn {
