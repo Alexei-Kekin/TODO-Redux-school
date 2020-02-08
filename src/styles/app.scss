@@ -10,7 +10,7 @@
   }
 
   100% {
-    opacity: 0.5;
+    opacity: 0.6;
     visibility: visible;
     transform: translate(0, 0);
   }
@@ -46,14 +46,14 @@ body {
 }
 
 .todo {
-  width: 400px;
+  width: 600px;
   padding: 30px;
   border: 1px solid black;
   background: transparent;
 }
 
 .todo--input-empty {
-  background: #ff8c80;
+  background: #76cdff;
 }
 
 .todo-controls {
@@ -74,7 +74,7 @@ body {
 
 .todo__item-preview {
   opacity: 0.5;
-  animation: item-fade-in-from-right 500ms;
+  animation: item-fade-in-from-right 600ms;
 }
 
 .todo__list-item-btn {
@@ -82,4 +82,8 @@ body {
   padding: 2px 5px;
   background-color: cadetblue;
   color: black;
+}
+
+.todo__controls-input {
+  margin-left: 10px;
 }

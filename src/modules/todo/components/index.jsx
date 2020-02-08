@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {addTodo} from "../actions";
+import { addTodo, removeTodo, setFilter } from '../actions';
 
 export const Todo = () => {
   const todoReducer = useSelector(state => state.todoReducer);
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
-  const { items } = todoReducer;
+  const { items, filter } = todoReducer;
   const trimmedValue = value.trim();
 
-  const handleTodoTitleChange = (event) => {
+  const filteredItems = items.filter(item => (
+    item.title.toLowerCase().indexOf(filter.trim().toLocaleLowerCase()) !== -1
+  ));
+
+  const handleTodoTitleChange = event => {
     setValue(event.target.value);
+  };
+
+  const handleFilterChange = event => {
+    dispatch(setFilter(event.target.value));
   };
 
   const handleAddTodoItem = () => {
@@ -23,9 +31,14 @@ export const Todo = () => {
       <div className="todo-controls">
         <input
           id="todo-input"
-          type="text"
+          placeholder="Please type in TODO"
           onChange={handleTodoTitleChange}
           value={value}
+        />
+        <input
+          className="todo__controls-input"
+          placeholder="Please type in filter"
+          onChange={handleFilterChange}
         />
         <button
           className="todo-btn-add"
@@ -37,9 +50,15 @@ export const Todo = () => {
         </button>
       </div>
       <ul>
-        { items.map(item => (
+        { filteredItems.map(item => (
           <li key={item.id}>
-            {item.title}
+            { item.title }
+            <button
+              className="todo__list-item-btn"
+              onClick={ () => { dispatch(removeTodo(item.id)); }}
+            >
+              X
+            </button>
           </li>
         )) }
         { !!trimmedValue && (

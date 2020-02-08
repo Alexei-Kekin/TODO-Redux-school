@@ -1,6 +1,7 @@
-import { TODO_ADD, TODO_REMOVE } from './constans';
+import { TODO_ADD, TODO_REMOVE, TODO_SET_FILTER } from './constans';
 
 const initialState = {
+  filter: '',
   items: [
     { id: Date.now() + Math.random(), title: 'One' },
     { id: Date.now() + Math.random(), title: 'Two' },
@@ -29,6 +30,12 @@ export function todoReducer(state = initialState, action) {
         items: newItems,
       };
     }
+
+    case TODO_SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload.value,
+      };
 
     default:
       return state;

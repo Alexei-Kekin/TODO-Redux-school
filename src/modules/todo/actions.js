@@ -1,4 +1,4 @@
-import { TODO_ADD, TODO_REMOVE } from './constans';
+import { TODO_ADD, TODO_REMOVE, TODO_SET_FILTER } from './constans';
 
 export function addTodo(title) {
   return {
@@ -15,6 +15,15 @@ export function removeTodo(id) {
     type: TODO_REMOVE,
     payload: {
       id,
+    },
+  };
+}
+
+export function setFilter(value) {
+  return {
+    type: TODO_SET_FILTER,
+    payload: {
+      value,
     },
   };
 }
