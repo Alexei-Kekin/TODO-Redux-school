@@ -1,6 +1,7 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {createCounterDecrementAction, createCounterIncrementAction} from "../actions";
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import { createCounterDecrementAction, createCounterIncrementAction } from '../actions';
 
 export function Counter(props) {
   const value = useSelector(state => state.counterReducer);
@@ -16,17 +17,27 @@ export function Counter(props) {
 
   return (
     <div>
-      <button onClick={handleDecrease} className="counter_button">
-      -
-      </button>
-    <div
-      className="counter_value"
-    >
-      { value }
-    </div>
-      <button onClick={handleIncrease} className="counter_button">
+      <Button
+        className="counter_button"
+        variant="contained"
+        color="primary"
+        onClick={handleDecrease}
+      >
+        -
+      </Button>
+      <div
+        className="counter_value"
+      >
+        { value }
+      </div>
+      <Button
+        className="counter_button"
+        variant="contained"
+        color="primary"
+        onClick={handleIncrease}
+      >
         +
-      </button>
+      </Button>
     </div>
   );
 }

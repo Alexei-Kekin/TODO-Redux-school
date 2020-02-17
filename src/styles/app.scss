@@ -18,7 +18,6 @@
 
 body {
   padding: 50px;
-  background-color: aquamarine;
 }
 
 .counter_value{
@@ -47,13 +46,14 @@ body {
 
 .todo {
   width: 600px;
+  margin: 20px 0;
   padding: 30px;
   border: 1px solid black;
-  background: transparent;
+  background-color: rgb(255, 253, 185);
 }
 
 .todo--input-empty {
-  background: #76cdff;
+  background: transparent;
 }
 
 .todo-controls {
@@ -80,10 +80,15 @@ body {
 .todo__list-item-btn {
   margin-left: 20px;
   padding: 2px 5px;
-  background-color: cadetblue;
   color: black;
 }
 
 .todo__controls-input {
-  margin-left: 10px;
+  margin-left: 20px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
 }
