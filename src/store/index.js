@@ -1,17 +1,17 @@
-import { applyMiddleware } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { counterReducer } from '../modules/counter/reducer';
 import { todoReducer } from '../modules/todo/reducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
 
-const combinedReducers = window.Redux.combineReducers({
+const combinedReducers = combineReducers({
   counterReducer,
   todoReducer,
 });
 
-// const logger = store => next => action => {
-//   console.log(JSON.stringify(action, null , 4));
-//   next(action);
-// };
+const logger = () => next => action => {
+  console.log(JSON.stringify(action, null, 4));
+  next(action);
+};
 //
 // const delayActions = store => next => action => {
 //   console.log('Debounce middleware START');
@@ -21,7 +21,7 @@ const combinedReducers = window.Redux.combineReducers({
 //   }, 3000);
 // };
 
-export const asyncActionsMiddleware = store =>next=> action=> {
+export const asyncActionsMiddleware = () => next => action => {
   if (typeof action === 'function') {
     action(next);
   } else {
@@ -29,11 +29,11 @@ export const asyncActionsMiddleware = store =>next=> action=> {
   }
 };
 
-const middlewares = [asyncActionsMiddleware];
+const middlewares = [asyncActionsMiddleware, logger];
 const middlewareEnchancer = applyMiddleware(...middlewares);
 const enchancers = [middlewareEnchancer];
 
-export const store = window.Redux.createStore(
+export const store = createStore(
   combinedReducers,
   undefined,
   composeWithDevTools(...enchancers),

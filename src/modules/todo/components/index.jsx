@@ -6,19 +6,19 @@ import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import {
-  addTodo, getTodoItems, updateTodo, removeTodo, setFilter,
+  addTodo, getTodoItems, removeTodo, setFilter,
 } from '../actions';
 
 
 export const Todo = () => {
   const todoReducer = useSelector(state => state.todoReducer);
   const dispatch = useDispatch();
-  const [value, setValue] = useState('');
+  const [titleValue, setTitleValue] = useState('');
   const { isLoading, items, filter } = todoReducer;
-  const trimmedValue = value.trim();
+  const trimmedValue = titleValue.trim();
 
   useEffect(() => {
-    dispatch(getTodoItems());
+    dispatch(getTodoItems(titleValue));
   }, []);
 
   const filteredItems = items.filter(item => (
@@ -27,13 +27,13 @@ export const Todo = () => {
 
   function handleAddTodoItem() {
     if (trimmedValue !== '') {
-      dispatch(addTodo(value));
-      setValue('');
+      dispatch(addTodo(titleValue));
+      setTitleValue('');
     }
   }
 
   const handleTodoTitleChange = event => {
-    setValue(event.target.value);
+    setTitleValue(event.target.value);
   };
 
   const handleTodoTitleInputKeydown = event => {
@@ -64,7 +64,7 @@ export const Todo = () => {
           label="Please type in TODO"
           onChange={handleTodoTitleChange}
           onKeyDown={handleTodoTitleInputKeydown}
-          value={value}
+          value={titleValue}
           variant="outlined"
         />
         <TextField
@@ -88,14 +88,14 @@ export const Todo = () => {
       </div>
       <ul>
         { filteredItems.map(item => (
-          <li key={item.id}>
+          <li key={item._id}>
             { item.title }
             <Button
               className="todo__list-item-btn"
               variant="contained"
               color="primary"
               startIcon={<DeleteIcon />}
-              onClick={() => { dispatch(removeTodo(item.id)); }}
+              onClick={() => { dispatch(removeTodo(item._id)); }}
             >
               DELETE
             </Button>

@@ -1,16 +1,18 @@
+const API_URL = 'http://e8433f6a.ngrok.io/api/todo';
 
-// const MOCKED_TODO_ITEMS = [
-//   { id: Date.now() + Math.random(), title: 'Проснуться' },
-//   { id: Date.now() + Math.random(), title: 'Умыться' },
-//   { id: Date.now() + Math.random(), title: 'Почистить зубы' },
-//   { id: Date.now() + Math.random(), title: 'Поесть' },
-//   { id: Date.now() + Math.random(), title: 'Собраться' },
-// ];
+export const requestTodoItems = () => fetch(`${API_URL}`).then(response => response.json());
 
-const API_URL = 'http://cb3e530c.ngrok.io';
-
-export const requestTodoItems = () => fetch(`${API_URL}/todos`).then(response => response.json());
-
+export const postTodoItem = todo => {
+  fetch('',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todo),
+    })
+    .then();
+};
 
 // export const requestTodoItems = () => new Promise(resolve =>{
 //   setTimeout(() => {
@@ -26,4 +28,11 @@ export const requestTodoItems = () => fetch(`${API_URL}/todos`).then(response =>
 //   fetch('http://5de86ae9.ngrok.io/todos').then(response => response.json());
 // }
 
+// const MOCKED_TODO_ITEMS = [
+//   { id: Date.now() + Math.random(), title: 'Проснуться' },
+//   { id: Date.now() + Math.random(), title: 'Умыться' },
+//   { id: Date.now() + Math.random(), title: 'Почистить зубы' },
+//   { id: Date.now() + Math.random(), title: 'Поесть' },
+//   { id: Date.now() + Math.random(), title: 'Собраться' },
+// ];
 
