@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
-import { addTodo, removeTodo, setFilter } from '../actions';
-import Icon from "@material-ui/core/Icon";
+import Icon from '@material-ui/core/Icon';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import {
+  addTodo, getTodoItems, updateTodo, removeTodo, setFilter,
+} from '../actions';
 
 
 export const Todo = () => {
   const todoReducer = useSelector(state => state.todoReducer);
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
-  const { items, filter } = todoReducer;
+  const { isLoading, items, filter } = todoReducer;
   const trimmedValue = value.trim();
 
+  useEffect(() => {
+    dispatch(getTodoItems());
+  }, []);
+
   const filteredItems = items.filter(item => (
-    item.title.toLowerCase().indexOf(filter.trim().toLocaleLowerCase()) !== -1
+    item.title.toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1
   ));
 
   function handleAddTodoItem() {
@@ -39,8 +46,18 @@ export const Todo = () => {
     dispatch(setFilter(event.target.value));
   };
 
+  if (isLoading) {
+    return (
+      <div className="todo">
+        <LinearProgress className="todo__spinner" />
+      </div>
+
+    );
+  }
+
+  // {`todo ${!trimmedValue ? 'todo--input-empty' : ' '}`}
   return (
-    <div className={`todo ${!trimmedValue ? 'todo--input-empty' : ' '}`}>
+    <div className="todo">
       <div className="todo-controls">
         <TextField
           id="todo-input"

@@ -1,4 +1,7 @@
-import { TODO_ADD, TODO_REMOVE, TODO_SET_FILTER } from './constans';
+import {
+  TODO_ADD, TODO_GET_ITEMS, TODO_GET_ITEMS_SUCCESS, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER,
+} from './constans';
+import { requestTodoItems } from './services/api';
 
 export function addTodo(title) {
   return {
@@ -6,6 +9,35 @@ export function addTodo(title) {
     payload: {
       id: Date.now() + Math.random(),
       title,
+    },
+  };
+}
+
+export function getTodoItemSuccess(items) {
+  return {
+    type: TODO_GET_ITEMS_SUCCESS,
+    payload: items,
+  };
+}
+
+export function getTodoItems() {
+  return function (dispatch) {
+    dispatch({
+      type: TODO_GET_ITEMS,
+    });
+
+    requestTodoItems().then(result => {
+      dispatch(getTodoItemSuccess(result));
+    });
+  };
+}
+
+export function updateTodo(id, data) {
+  return {
+    type: TODO_UPDATE,
+    payload: {
+      id,
+      data,
     },
   };
 }

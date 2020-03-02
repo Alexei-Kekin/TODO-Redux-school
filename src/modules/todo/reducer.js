@@ -1,29 +1,59 @@
-import { TODO_ADD, TODO_REMOVE, TODO_SET_FILTER } from './constans';
+import {TODO_ADD, TODO_GET_ITEMS, TODO_GET_ITEMS_SUCCESS, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER, } from './constans';
 
 const initialState = {
   filter: '',
-  items: [
-    { id: Date.now() + Math.random(), title: 'One' },
-    { id: Date.now() + Math.random(), title: 'Two' },
-    { id: Date.now() + Math.random(), title: 'Three' },
-    { id: Date.now() + Math.random(), title: 'Four' },
-    { id: Date.now() + Math.random(), title: 'Five' },
-  ],
+  isLoading: false,
+  items: [],
 };
 
-export function todoReducer(state = initialState, action) {
-  switch (action.type) {
+export function todoReducer(state = initialState, { type, payload }) {
+  const { items } = state;
+
+  switch (type) {
     case TODO_ADD:
       return {
         ...state,
         items: [
-          ...state.items,
-          action.payload,
+          ...items,
+          payload,
         ],
       };
 
+    case TODO_GET_ITEMS: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case TODO_GET_ITEMS_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        items: payload,
+      };
+    }
+
+    case TODO_UPDATE: {
+      const newItems = items.map(item => {
+        if (item.id === payload.id) {
+          return {
+            ...item,
+            ...payload.data,
+          };
+        }
+
+        return item;
+      });
+
+      return {
+        ...state,
+        items: newItems,
+      };
+    }
+
     case TODO_REMOVE: {
-      const newItems = state.items.filter(item => item.id !== action.payload.id);
+      const newItems = items.filter(item => item.id !== payload.id);
 
       return {
         ...state,
@@ -34,7 +64,7 @@ export function todoReducer(state = initialState, action) {
     case TODO_SET_FILTER:
       return {
         ...state,
-        filter: action.payload.value,
+        filter: payload.value,
       };
 
     default:
