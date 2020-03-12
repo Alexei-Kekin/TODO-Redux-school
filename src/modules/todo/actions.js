@@ -1,14 +1,15 @@
 import {
   TODO_ADD, TODO_GET_ITEMS, TODO_GET_ITEMS_SUCCESS, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER,
 } from './constans';
-import { requestTodoItems } from './services/api';
+import { requestTodoItems} from './services/api';
 
 export function addTodo(title) {
   return {
     type: TODO_ADD,
     payload: {
-      id: Date.now() + Math.random(),
+      isCompleted: false,
       title,
+      id: Date.now() + Math.random(),
     },
   };
 }

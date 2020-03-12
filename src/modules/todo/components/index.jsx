@@ -5,8 +5,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Switch from '@material-ui/core/Switch';
 import {
-  addTodo, getTodoItems, removeTodo, setFilter,
+  addTodo, getTodoItems, removeTodo, setFilter, updateTodo,
 } from '../actions';
 
 
@@ -86,16 +87,24 @@ export const Todo = () => {
          add
         </Button>
       </div>
-      <ul>
-        { filteredItems.map(item => (
-          <li key={item._id}>
-            { item.title }
+      <ul className="todo__list">
+        { filteredItems.map(({ id, isCompleted, title }) => (
+          <li className="todo__item" key={id}>
+            <Switch
+              color="primary"
+              checked={isCompleted}
+              value={isCompleted}
+              onChange={event => {
+                dispatch(updateTodo(id, { isCompleted: event.target.checked }));
+              }}
+            />
+            { title }
             <Button
               className="todo__list-item-btn"
               variant="contained"
               color="primary"
               startIcon={<DeleteIcon />}
-              onClick={() => { dispatch(removeTodo(item._id)); }}
+              onClick={() => { dispatch(removeTodo(id)); }}
             >
               DELETE
             </Button>

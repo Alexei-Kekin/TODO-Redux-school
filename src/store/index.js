@@ -1,4 +1,5 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { logger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { counterReducer } from '../modules/counter/reducer';
 import { todoReducer } from '../modules/todo/reducer';
@@ -8,10 +9,9 @@ const combinedReducers = combineReducers({
   todoReducer,
 });
 
-const logger = () => next => action => {
-  console.log(JSON.stringify(action, null, 4));
-  next(action);
-};
+// const logger = () => next => action => {
+//   next(action);
+// };
 //
 // const delayActions = store => next => action => {
 //   console.log('Debounce middleware START');
