@@ -8,8 +8,10 @@ import { Todo } from './modules/todo/components/index';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Counter firstName="Alex" />
-    <Todo />
+    <div className="container">
+      <Counter />
+      <Todo />
+    </div>
   </Provider>,
   document.getElementById('root'),
 );

@@ -5,7 +5,7 @@ import { IEnvironment } from './types';
 
 const BUILD_DIR = 'dist';
 const DEV_SERVER_HOST = '127.0.0.1';
-const DEV_SERVER_PORT = 3000;
+const DEV_SERVER_PORT = 4000;
 
 export default (env: IEnvironment): webpack.Configuration => {
   const basicConfig = generateBasicConfig(env) || {};

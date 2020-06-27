@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { createCounterDecrementAction, createCounterIncrementAction } from '../actions';
 
-export function Counter(props) {
+export function Counter() {
   const value = useSelector(state => state.counterReducer);
   const dispatch = useDispatch();
 

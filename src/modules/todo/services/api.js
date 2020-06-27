@@ -1,4 +1,5 @@
-const API_URL = 'http://142.93.99.89:5000/api/todo';
+// const API_URL = 'http://142.93.99.89:5000/api/todo';
+const API_URL = 'https://jsonplaceholder.typicode.com/todos?_limit=7';
 
 export const requestTodoItems = () => fetch(`${API_URL}`).then(response => response.json());
 
