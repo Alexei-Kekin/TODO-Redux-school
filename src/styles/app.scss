@@ -20,6 +20,10 @@ body {
   padding: 50px;
 }
 
+.container {
+  text-align: center;
+}
+
 .counter_value{
   display: inline-block;
   padding: 10px 20px;
@@ -46,11 +50,10 @@ body {
 
 .todo {
   width: 600px;
-  margin: 20px 0;
-  text-align: left;
+  margin: 20px auto;
   padding: 30px;
   border: 1px solid black;
-  background-color: white;
+  background-color: rgba(0, 255, 173, 0.31);
 }
 
 .todo__list {
@@ -98,7 +101,10 @@ body {
 }
 
 li {
+  font-family: "Roboto Thin", sans-serif;
   display: flex;
   justify-content: space-between;
   margin: 5px 0;
+  font-size: 12px;
+  font-weight: bolder;
 }
